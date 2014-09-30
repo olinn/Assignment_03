@@ -1,15 +1,13 @@
 package com.tgra;
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.GL11;
+import com.badlogic.gdx.utils.BufferUtils;
+
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL11;
-import com.badlogic.gdx.utils.BufferUtils;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 
-
-public class Assignment3Base implements ApplicationListener
+public class Assignment3Base implements ApplicationListener, InputProcessor
 {
 	Camera camFirstPerson;
 	Camera camTopDown;
@@ -17,24 +15,27 @@ public class Assignment3Base implements ApplicationListener
     boolean third;
 	FloatBuffer vertexBuffer;
 	FloatBuffer vertexBuffer2DBox;
-	
+    InputMultiplexer listener;
+
 	Arrow arrow;
 
     ArrayList<Box> outerWalls;
 
     int[][] maze;
-	
+
 	@Override
 	public void create() {
 		// TODO Auto-generated method stub
 		Gdx.gl11.glEnable(GL11.GL_LIGHTING);
 		Gdx.gl11.glEnable(GL11.GL_LIGHT0);
 		Gdx.gl11.glEnable(GL11.GL_DEPTH_TEST);
-		
+
 		Gdx.gl11.glClearColor(0.5f, 0.0f, 0.0f, 1.0f);
 
 		Gdx.gl11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
 
+
+        Gdx.input.setInputProcessor(this);
 
 
 		camFirstPerson = new Camera();
@@ -43,7 +44,7 @@ public class Assignment3Base implements ApplicationListener
 
         //arguments: FOV, aspect ratio, near plane, far plane
         camFirstPerson.perspective(90.0f, 1.333333f, 1.0f, 40.0f);
-		
+
 		camTopDown = new Camera();
 		camTopDown.perspective(40.0f, 1.333333f, 5.0f, 20.0f);
 
@@ -51,7 +52,7 @@ public class Assignment3Base implements ApplicationListener
         camThirdPerson.lookAt(new Point3D(0.0f, 5.0f, 5.0f), new Point3D(0.0f, 0.0f, 0.0f), new Vector3D(0.0f, 1.0f, 0.0f));
         camThirdPerson.perspective(120.0f, 1.33333f, 1.0f, 20.0f);
         third = false;
-		
+
 		arrow = new Arrow();
 		arrow.create();
 
@@ -100,18 +101,18 @@ public class Assignment3Base implements ApplicationListener
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	boolean movingRight = false;
 	boolean movingUp = false;
-	
+
 	float arrowRotation = 0.0f;
 
 	private void update()
@@ -155,7 +156,7 @@ public class Assignment3Base implements ApplicationListener
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             camFirstPerson.pitch(-2.0f);
         }*/
-
+/*
         if(Gdx.input.isKeyPressed(Input.Keys.V))
         {
             if(third) {
@@ -165,7 +166,7 @@ public class Assignment3Base implements ApplicationListener
                 third = true;
             }
         }
-
+*/
         camThirdPerson.lookAt(new Point3D(camFirstPerson.eye.x, camFirstPerson.eye.y + 5.0f, camFirstPerson.eye.z + 5.0f), camFirstPerson.eye, camFirstPerson.v);
         System.out.println(camFirstPerson.eye.x + " " + camFirstPerson.eye.z);
 
@@ -175,7 +176,7 @@ public class Assignment3Base implements ApplicationListener
 	private void drawBox()
 	{
 		Gdx.gl11.glVertexPointer(3, GL11.GL_FLOAT, 0, vertexBuffer);
-		
+
 		Gdx.gl11.glNormal3f(0.0f, 0.0f, -1.0f);
 		Gdx.gl11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, 4);
 		Gdx.gl11.glNormal3f(1.0f, 0.0f, 0.0f);
@@ -189,7 +190,7 @@ public class Assignment3Base implements ApplicationListener
 		Gdx.gl11.glNormal3f(0.0f, -1.0f, 0.0f);
 		Gdx.gl11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 20, 4);
 	}
-	
+
 	private void display()
 	{
 		Gdx.gl11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
@@ -197,11 +198,11 @@ public class Assignment3Base implements ApplicationListener
 		//Gdx.gl11.glMatrixMode(GL11.GL_PROJECTION);
 		//Gdx.gl11.glLoadIdentity();
 		//Gdx.glu.gluPerspective(Gdx.gl11, 90, 1.333333f, 1.0f, 10.0f);
-		
+
 		//Gdx.gl11.glMatrixMode(GL11.GL_MODELVIEW);
 		//Gdx.gl11.glLoadIdentity();
 		//Gdx.glu.gluLookAt(Gdx.gl11, -1.0f, -1.0f, 3.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-		
+
 		for(int i = 0; i < 2; i++)
 		{
 			if(i == 0)
@@ -281,10 +282,10 @@ public class Assignment3Base implements ApplicationListener
 
             float[] lightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
 			Gdx.gl11.glLightfv(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, lightDiffuse, 0);
-	
+
 			float[] lightPosition = {5.0f, 10.0f, 15.0f, 0.0f};
 			Gdx.gl11.glLightfv(GL11.GL_LIGHT0, GL11.GL_POSITION, lightPosition, 0);
-	
+
 			float[] materialDiffuse = {1.0f, 1.0f, 0.0f, 1.0f};
 			Gdx.gl11.glMaterialfv(GL11.GL_FRONT, GL11.GL_DIFFUSE, materialDiffuse, 0);
 	
@@ -347,13 +348,13 @@ public class Assignment3Base implements ApplicationListener
 	@Override
 	public void resize(int arg0, int arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
     public void drawFloor()
@@ -452,4 +453,65 @@ public class Assignment3Base implements ApplicationListener
 
 
     }
+
+    @Override
+    public boolean keyDown(int arg0) {
+    return false;
+    }
+
+
+    @Override
+    public boolean keyTyped(char arg0) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int arg0) {
+        System.out.println("FOKK");
+        if (Input.Keys.V == arg0) {
+            if (third) {
+                third = false;
+            } else {
+                third = true;
+            }
+
+        }
+    return false;
+    }
+
+    @Override
+    public boolean scrolled(int arg0) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int arg0, int arg1, int arg2) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean touchMoved(int arg0, int arg2) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+
+
+
 }
+
