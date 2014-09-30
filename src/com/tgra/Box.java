@@ -48,6 +48,10 @@ public class Box {
         this.position = position;
     }
 
+    public Point3D getPosition(){
+            return this.position;
+    }
+
     public void setSize(float size)
     {
         this.size = size;
