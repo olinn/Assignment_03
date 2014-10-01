@@ -112,7 +112,7 @@ public class Assignment3Base implements ApplicationListener
 	boolean movingRight = false;
 	boolean movingUp = false;
 	
-	float arrowRotation = 0.0f;
+
 
 	private void update()
 	{
