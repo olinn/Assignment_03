@@ -36,9 +36,11 @@
       <file leaf-file-name="Assignment3Base.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tgra/Assignment3Base.java">
           <provider selected="true" editor-type-id="text-editor">
+
             <state vertical-scroll-proportion="-0.39159292" vertical-offset="1996" max-vertical-offset="7718">
               <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
               <folding />
+
             </state>
           </provider>
         </entry>
@@ -46,7 +48,9 @@
       <file leaf-file-name="Vector3D.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tgra/Vector3D.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="266" max-vertical-offset="918">
+
+            <state vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="1122">
+
               <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding />
             </state>
@@ -76,6 +80,7 @@
       <file leaf-file-name="Box.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tgra/Box.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0" vertical-offset="901" max-vertical-offset="1547">
               <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
               <folding>
@@ -86,6 +91,7 @@
                 <element signature="e#1596#1597#0" expanded="true" />
                 <element signature="e#1630#1631#0" expanded="true" />
               </folding>
+
             </state>
           </provider>
         </entry>
@@ -103,7 +109,9 @@
       <file leaf-file-name="Camera.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tgra/Camera.java">
           <provider selected="true" editor-type-id="text-editor">
+
             <state vertical-scroll-proportion="0.0" vertical-offset="1802" max-vertical-offset="2125">
+
               <caret line="106" column="4" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="4" />
               <folding />
             </state>
@@ -127,10 +135,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="54" />
-    <option name="y" value="-8" />
-    <option name="width" value="1554" />
-    <option name="height" value="916" />
+    <option name="width" value="800" />
+    <option name="height" value="860" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -160,6 +166,9 @@
       <sortByType />
     </navigator>
     <panes>
+
+      <pane id="Scope" />
+
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -175,12 +184,15 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Assignment_03" />
+
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+
       <pane id="Scope" />
+
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -457,15 +469,19 @@
       <workItem from="1411918926268" duration="10775000" />
       <workItem from="1412003765530" duration="3537000" />
       <workItem from="1412086252049" duration="6604000" />
+
       <workItem from="1412096926791" duration="4440000" />
+
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+
     <option name="totallyTimeSpent" value="26528000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1554" height="916" extended-state="7" />
+
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -487,8 +503,10 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34955186" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -530,9 +548,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tgra/Assignment3Base.java">
       <provider selected="true" editor-type-id="text-editor">
+
         <state vertical-scroll-proportion="0.0" vertical-offset="4241" max-vertical-offset="6579">
           <caret line="265" column="37" selection-start-line="265" selection-start-column="37" selection-end-line="265" selection-end-column="37" />
           <folding />
+
         </state>
       </provider>
     </entry>
@@ -562,6 +582,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tgra/Box.java">
       <provider selected="true" editor-type-id="text-editor">
+
         <state vertical-scroll-proportion="0.0" vertical-offset="722" max-vertical-offset="1598">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding>
@@ -572,6 +593,7 @@
             <element signature="e#1596#1597#0" expanded="true" />
             <element signature="e#1630#1631#0" expanded="true" />
           </folding>
+
         </state>
       </provider>
     </entry>
@@ -603,7 +625,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6324">
           <caret line="336" column="50" selection-start-line="336" selection-start-column="50" selection-end-line="336" selection-end-column="50" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13861#13862#0" expanded="true" />
+            <element signature="e#13885#13886#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -627,7 +653,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="6528">
           <caret line="94" column="13" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13861#13862#0" expanded="true" />
+            <element signature="e#13885#13886#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -651,7 +681,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3123" max-vertical-offset="4488">
           <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13861#13862#0" expanded="true" />
+            <element signature="e#13885#13886#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -675,7 +709,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2700" max-vertical-offset="4488">
           <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13861#13862#0" expanded="true" />
+            <element signature="e#13885#13886#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -699,7 +737,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2700" max-vertical-offset="4488">
           <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13861#13862#0" expanded="true" />
+            <element signature="e#13885#13886#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -723,7 +765,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2550" max-vertical-offset="4488">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13861#13862#0" expanded="true" />
+            <element signature="e#13885#13886#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -743,10 +789,12 @@
         </state>
       </provider>
     </entry>
+
     <entry file="file://$PROJECT_DIR$/src/com/tgra/Color3.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
           <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+
           <folding />
         </state>
       </provider>
@@ -759,10 +807,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tgra/Camera.java">
+    <entry file="file://$PROJECT_DIR$/src/com/tgra/Color3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1232" max-vertical-offset="2091">
-          <caret line="106" column="4" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -777,6 +825,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tgra/Box.java">
       <provider selected="true" editor-type-id="text-editor">
+
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1547">
           <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
           <folding>
@@ -787,14 +836,29 @@
             <element signature="e#1596#1597#0" expanded="true" />
             <element signature="e#1630#1631#0" expanded="true" />
           </folding>
+
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tgra/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+
+        <state vertical-scroll-proportion="-0.39159292" vertical-offset="1996" max-vertical-offset="7718">
+          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tgra/Assignment3Base.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.39159292" vertical-offset="1996" max-vertical-offset="7718">
-          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.6274165" vertical-offset="7786" max-vertical-offset="8891">
+          <caret line="479" column="17" selection-start-line="479" selection-start-column="17" selection-end-line="479" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13861#13862#0" expanded="true" />
+            <element signature="e#13885#13886#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
