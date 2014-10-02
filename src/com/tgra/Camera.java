@@ -116,4 +116,9 @@ public class Camera
 		n = Vector3D.add(Vector3D.scale(v, -sin), Vector3D.scale(n, cos));
 		v = newV;
 	}
+
+    public Vector3D getNnegative()
+    {
+        return new Vector3D(n.x * -1, n.y * -1, n.z * -1);
+    }
 }

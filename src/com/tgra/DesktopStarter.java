@@ -6,6 +6,6 @@ public class DesktopStarter
 {
 	public static void main(String[] args)
 	{
-		new LwjglApplication(new Assignment3Base(), "Assignment 3 Base", 640, 480, false);
+		new LwjglApplication(new Assignment3Base(), "Assignment 3 Base", 1280, 720, false);
 	}
 }

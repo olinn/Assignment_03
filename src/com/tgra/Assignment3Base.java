@@ -1,7 +1,9 @@
 package com.tgra;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL11;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.BufferUtils;
+
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 
 	Arrow arrow;
 
-    ArrayList<Box> outerWalls;
+    outerWalls outer;
 
     int[][] maze;
 
@@ -43,14 +45,14 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 		//camFirstPerson.perspective(90.0f, 1.333333f, 1.0f, 10.0f);
 
         //arguments: FOV, aspect ratio, near plane, far plane
-        camFirstPerson.perspective(90.0f, 1.333333f, 1.0f, 40.0f);
+        camFirstPerson.perspective(90.0f, 1600/900, 1.0f, 40.0f);
 
 		camTopDown = new Camera();
-		camTopDown.perspective(40.0f, 1.333333f, 5.0f, 20.0f);
+		camTopDown.perspective(40.0f, 1600/900, 5.0f, 20.0f);
 
         camThirdPerson = new Camera();
         camThirdPerson.lookAt(new Point3D(0.0f, 5.0f, 5.0f), new Point3D(0.0f, 0.0f, 0.0f), new Vector3D(0.0f, 1.0f, 0.0f));
-        camThirdPerson.perspective(120.0f, 1.33333f, 1.0f, 20.0f);
+        camThirdPerson.perspective(120.0f, 1600/900, 1.0f, 20.0f);
         third = false;
 
 		arrow = new Arrow();
@@ -63,40 +65,12 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
         Box.loadVertices();
 
 
+        //Create outer walls
 
-        maze = new int[12][12];
+        outer = new outerWalls();
+        outer.create();
 
-        for(int x = 0; x < 12; x++)
-        {
-            if(x == 0 || x == 11) {
-                for (int z = 0; z < 12; z++) {
-                    maze[x][z] = 1;
-                }
-            }
-        }
-
-        for(int x = 0; x < 12; x++)
-        {
-            for (int z = 0; z < 12; z++) {
-                if(z == 0 || z == 11) {
-                    maze[x][z] = 1;
-                }
-                }
-
-        }
-
-        for(int i = 0; i < 12; i++)
-        {
-                for (int j = 0; j < 12; j++) {
-                    System.out.print(maze[i][j]);
-                }
-
-            System.out.println("");
-
-        }
-
-
-	}
+    }
 
 	@Override
 	public void dispose() {
@@ -123,11 +97,10 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
         int x = (int) camFirstPerson.eye.x;
         int z = (int) camFirstPerson.eye.z;
         if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-
             camFirstPerson.slide(-5.0f * deltaTime, 0.0f, 0.0f);
 
-        }
 
+        }
 
         if(Gdx.input.isKeyPressed(Input.Keys.D)) {
             camFirstPerson.slide(5.0f * deltaTime, 0.0f, 0.0f);
@@ -145,9 +118,11 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             camFirstPerson.yaw(-2.0f);
+
         }
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             camFirstPerson.yaw(2.0f);
+
         }
         /*if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
             camFirstPerson.pitch(2.0f);
@@ -155,19 +130,17 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             camFirstPerson.pitch(-2.0f);
         }*/
-/*
-        if(Gdx.input.isKeyPressed(Input.Keys.V))
-        {
-            if(third) {
-                third = false;
-            }
-            else {
-                third = true;
-            }
-        }
-*/
-        camThirdPerson.lookAt(new Point3D(camFirstPerson.eye.x, camFirstPerson.eye.y + 5.0f, camFirstPerson.eye.z + 5.0f), camFirstPerson.eye, camFirstPerson.v);
-        System.out.println(camFirstPerson.eye.x + " " + camFirstPerson.eye.z);
+
+
+
+
+        camThirdPerson.lookAt(
+                new Point3D(
+                        camFirstPerson.eye.x + camFirstPerson.n.x , 5.0f, camFirstPerson.eye.z + camFirstPerson.n.z ),
+                camFirstPerson.eye,
+                camFirstPerson.v
+                );
+
 
 
 	}
@@ -206,7 +179,7 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 		{
 			if(i == 0)
 			{
-				Gdx.gl11.glViewport(0, 0, 800, 600);
+				Gdx.gl11.glViewport(0, 0, 1280, 720);
 				//cam.setProjectionMatrix();
 				//cam.setModelViewMatrix();
                 if(third == true) {
@@ -248,7 +221,7 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 			}
             else
             {
-                Gdx.gl11.glViewport(480, 360, 160, 120);
+                Gdx.gl11.glViewport(1100, 600, 160, 120);
                 Gdx.gl11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
 
 
@@ -367,14 +340,15 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
         float[] materialDiffuse = {0.0f, 0.0f, 0.0f, 1.0f};
         Gdx.gl11.glMaterialfv(GL11.GL_FRONT, GL11.GL_DIFFUSE, materialDiffuse, 0);
         //                   x    y    z
-        Box floor = new Box(new Point3D(0, -10.5f, 0.0f),1f, new Color3(1f,1f,1f));
-        Gdx.gl11.glScalef(15f,0.1f,15f);
+        Box floor = new Box(new Point3D(0.0f, -10.5f, 0.0f),1f, new Color3(1f,1f,1f));
+        Gdx.gl11.glTranslatef(0.0f,0.0f,0.0f);
+        Gdx.gl11.glScalef(20f,0.1f,20f);
         floor.draw();
-        //drawBox();
     }
 
     public void drawWall()
     {
+
         float[] lightDiffuse = {1.0f, 1.0f, 1.0f, 0.0f};
         Gdx.gl11.glLightfv(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, lightDiffuse, 0);
 
@@ -383,70 +357,7 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 
         float[] materialDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
         Gdx.gl11.glMaterialfv(GL11.GL_FRONT, GL11.GL_DIFFUSE, materialDiffuse, 0);
-
-
-        Box eastWall = new Box(new Point3D(74.5f, 0.0f, 0.0f),1f, new Color3(1f,0f,1f));
-        Box westWall = new Box(new Point3D(-74.5f, 0.0f, 0.0f),1f, new Color3(1f,0f,1f));
-        Box northWall = new Box(new Point3D(0f, 0.0f, 74.5f),1f, new Color3(1f,0f,1f));
-        Box southWall = new Box(new Point3D(0f, 0.0f, -74.5f),1f, new Color3(1f,0f,1f));
-
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glScalef(0.1f,2f,15f);
-        eastWall.draw();
-        Gdx.gl11.glPopMatrix();
-
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glScalef(0.1f,2f,15f);
-        westWall.draw();
-        Gdx.gl11.glPopMatrix();
-
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glScalef(15f,2f,0.1f);
-        northWall.draw();
-        Gdx.gl11.glPopMatrix();
-
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glScalef(15f,2f,0.1f);
-        southWall.draw();
-        Gdx.gl11.glPopMatrix();
-
-
-
-        /*for(int i = 0; i < 15; i++) {
-                for (float j = 0; j < 15; j++) {
-                    if (j == 0 || j == 14) {
-                        Gdx.gl11.glPushMatrix();
-                        //                   x    y    z
-                        Gdx.gl11.glTranslatef(i, 1.0f, j);
-                        Gdx.gl11.glScalef(1f,5f,0.1f);
-                        drawBox();
-                        Gdx.gl11.glPopMatrix();
-
-
-                    }
-                }
-
-        }*/
-        /*for(int i = 0; i < 15; i++) {
-            if(i == 0 || i == 14) {
-                for (float j = 0; j < 15; j++) {
-
-                    Gdx.gl11.glPushMatrix();
-                    //                   x    y    z
-                    Gdx.gl11.glTranslatef(i, -0.5f, j);
-                    drawBox();
-                    Gdx.gl11.glPopMatrix();
-                    Gdx.gl11.glPushMatrix();
-                    //                   x    y    z
-                    Gdx.gl11.glTranslatef(i, 0.5f, j);
-                    drawBox();
-                    Gdx.gl11.glPopMatrix();
-
-                    Gdx.gl11.glPopMatrix();
-                }
-            }
-
-        }*/
+        outer.display();
 
 
 
@@ -455,6 +366,7 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 
     @Override
     public boolean keyDown(int arg0) {
+        System.out.println(camFirstPerson.eye.x + " " + camFirstPerson.eye.z);
     return false;
     }
 
@@ -467,7 +379,7 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 
     @Override
     public boolean keyUp(int arg0) {
-        System.out.println("FOKK");
+
         if (Input.Keys.V == arg0) {
             if (third) {
                 third = false;
