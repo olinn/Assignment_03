@@ -29,18 +29,27 @@ public class Box {
     }
 
     private Point3D position;
-    private float size;
+    private float xSize, ySize, zSize;
     private Color3 color;
+    public Point3D a,b, c, d;
 
     public Box()
     {
     }
 
-    public Box(Point3D position, float size, Color3 color)
+    public Box(Point3D position, float xSize,float ySize, float zSize, Color3 color)
     {
         setPosition(position);
-        setSize(size);
+        setSize(xSize,ySize,zSize);
         setColor(color);
+
+        a = new Point3D(position.x - xSize/2, position.y , position.z + zSize/2);
+        b = new Point3D(position.x + xSize/2, position.y , position.z + zSize/2);
+        c = new Point3D(position.x + xSize/2, position.y , position.z - zSize/2);
+        d = new Point3D(position.x - xSize/2, position.y , position.z - zSize/2);
+
+
+
     }
 
     public void setPosition(Point3D position)
@@ -52,9 +61,11 @@ public class Box {
             return this.position;
     }
 
-    public void setSize(float size)
+    public void setSize(float xSize, float ySize, float zSize)
     {
-        this.size = size;
+        this.xSize = xSize;
+        this.ySize = ySize;
+        this.zSize = zSize;
     }
 
     public void setColor(Color3 color)
@@ -69,7 +80,7 @@ public class Box {
         Gdx.gl11.glVertexPointer(3, GL11.GL_FLOAT, 0, vertexBuffer);
 
         Gdx.gl11.glTranslatef(position.x, position.y, position.z);
-        Gdx.gl11.glScalef(size, size, size);
+        Gdx.gl11.glScalef(xSize, ySize, zSize);
 
         float[] materialDiffuse = {color.r, color.g, color.b, 1.0f};
         Gdx.gl11.glMaterialfv(GL11.GL_FRONT, GL11.GL_DIFFUSE, materialDiffuse, 0);

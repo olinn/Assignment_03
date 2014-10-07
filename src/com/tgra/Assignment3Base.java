@@ -18,12 +18,12 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 	FloatBuffer vertexBuffer;
 	FloatBuffer vertexBuffer2DBox;
     InputMultiplexer listener;
+    float deltaTime;
+
+    boolean impact;
 
 	Arrow arrow;
-
     outerWalls outer;
-
-    int[][] maze;
 
 	@Override
 	public void create() {
@@ -50,10 +50,13 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 		camTopDown = new Camera();
 		camTopDown.perspective(40.0f, 1600/900, 5.0f, 20.0f);
 
+
+        //camThirdPerson.lookAt(new Point3D(0.0f, 5.0f, 5.0f), new Point3D(0.0f, 0.0f, 0.0f), new Vector3D(0.0f, 1.0f, 0.0f));
         camThirdPerson = new Camera();
-        camThirdPerson.lookAt(new Point3D(0.0f, 5.0f, 5.0f), new Point3D(0.0f, 0.0f, 0.0f), new Vector3D(0.0f, 1.0f, 0.0f));
         camThirdPerson.perspective(120.0f, 1600/900, 1.0f, 20.0f);
         third = false;
+
+
 
 		arrow = new Arrow();
 		arrow.create();
@@ -70,6 +73,8 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
         outer = new outerWalls();
         outer.create();
 
+
+        Gdx.gl11.glEnable(GL11.GL_NORMALIZE);
     }
 
 	@Override
@@ -90,29 +95,65 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 
 	private void update()
 	{
-		float deltaTime = Gdx.graphics.getDeltaTime();
+		deltaTime = Gdx.graphics.getDeltaTime();
 
         //X Y Z
 
         int x = (int) camFirstPerson.eye.x;
         int z = (int) camFirstPerson.eye.z;
         if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            camFirstPerson.slide(-5.0f * deltaTime, 0.0f, 0.0f);
+            for(Box i : outer.walls)
+            {
+                collide(i.a, i.b, camFirstPerson);
+                collide(i.b, i.c, camFirstPerson);
+                collide(i.d, i.c, camFirstPerson);
+                collide(i.a, i.d, camFirstPerson);
+            }
+            if(!impact) {
+                camFirstPerson.slide(-5.0f * deltaTime, 0.0f, 0.0f);
+            }
 
 
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-            camFirstPerson.slide(5.0f * deltaTime, 0.0f, 0.0f);
+            for(Box i : outer.walls)
+            {
+                collide(i.a, i.b, camFirstPerson);
+                collide(i.b, i.c, camFirstPerson);
+                collide(i.d, i.c, camFirstPerson);
+                collide(i.a, i.d, camFirstPerson);
+            }
+            if(!impact) {
+                camFirstPerson.slide(5.0f * deltaTime, 0.0f, 0.0f);
+            }
 
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-            camFirstPerson.slide(0.0f, 0.0f, -5.0f * deltaTime);
+            for(Box i : outer.walls)
+            {
+                collide(i.a, i.b, camFirstPerson);
+                collide(i.b, i.c, camFirstPerson);
+                collide(i.d, i.c, camFirstPerson);
+                collide(i.a, i.d, camFirstPerson);
+            }
+            if(!impact) {
+                camFirstPerson.slide(0.0f, 0.0f, -5.0f * deltaTime);
+            }
 
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            camFirstPerson.slide(0.0f, 0.0f, 5.0f * deltaTime);
+            for(Box i : outer.walls)
+            {
+                collide(i.a, i.b, camFirstPerson);
+                collide(i.b, i.c, camFirstPerson);
+                collide(i.d, i.c, camFirstPerson);
+                collide(i.a, i.d, camFirstPerson);
+            }
+            if(!impact) {
+                camFirstPerson.slide(0.0f, 0.0f, 5.0f * deltaTime);
+            }
 
         }
 
@@ -122,25 +163,9 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
         }
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             camFirstPerson.yaw(2.0f);
-
         }
-        /*if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            camFirstPerson.pitch(2.0f);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            camFirstPerson.pitch(-2.0f);
-        }*/
 
-
-
-
-        camThirdPerson.lookAt(
-                new Point3D(
-                        camFirstPerson.eye.x + camFirstPerson.n.x , 5.0f, camFirstPerson.eye.z + camFirstPerson.n.z ),
-                camFirstPerson.eye,
-                camFirstPerson.v
-                );
-
+        camThirdPerson.lookAt(new Point3D(camFirstPerson.eye.x + camFirstPerson.n.x, 4.0f, camFirstPerson.eye.z + camFirstPerson.n.z), camFirstPerson.eye, new Vector3D(0, 1, 0));
 
 
 	}
@@ -216,7 +241,6 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
                 }
                 else {
                     camFirstPerson.setMatrices();
-
                 }
 			}
             else
@@ -313,6 +337,7 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 	@Override
 	public void render()
 	{
+        impact = false;
 		update();
 		display();
 	}
@@ -339,10 +364,8 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
 
         float[] materialDiffuse = {0.0f, 0.0f, 0.0f, 1.0f};
         Gdx.gl11.glMaterialfv(GL11.GL_FRONT, GL11.GL_DIFFUSE, materialDiffuse, 0);
-        //                   x    y    z
-        Box floor = new Box(new Point3D(0.0f, -10.5f, 0.0f),1f, new Color3(1f,1f,1f));
-        Gdx.gl11.glTranslatef(0.0f,0.0f,0.0f);
-        Gdx.gl11.glScalef(20f,0.1f,20f);
+        //                                x    y    z
+        Box floor = new Box(new Point3D(0.0f, -2.5f, 0.0f),40f, 0.1f, 40f, new Color3(1f,1f,1f));
         floor.draw();
     }
 
@@ -358,15 +381,39 @@ public class Assignment3Base implements ApplicationListener, InputProcessor
         float[] materialDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
         Gdx.gl11.glMaterialfv(GL11.GL_FRONT, GL11.GL_DIFFUSE, materialDiffuse, 0);
         outer.display();
+    }
+
+    public void collide(Point3D pStart, Point3D pEnd, Camera cam ){
+        Vector3D temp = new Vector3D(0,0,0);
+
+        temp.x = -(pEnd.z - pStart.z);
+        temp.z = (pEnd.x - pStart.x);
+        float tHit = ((temp.x * (pStart.x - cam.eye. x ) + temp.z * (pStart.z - cam.eye.z ))
+                / (temp.x * cam.n.x + cam.n.z));
+
+        if(tHit <= deltaTime && tHit > 0){
+            Point3D pHit = new Point3D(cam.eye.x + cam.n.x * deltaTime, 0 ,cam.eye.z + cam.n.z * deltaTime );
 
 
+            if(pHit.x >= pStart.x && pHit.x <= pEnd.x || pHit.x >= pEnd.x && pHit.x <= pStart.x){
+                impact = true;
+            }
+
+            if(pHit.z >= pStart.z && pHit.z <= pEnd.z || pHit.z >= pEnd.z && pHit.z <= pStart.z){
+                impact = true;
+            }
+
+
+        }
 
 
     }
 
     @Override
     public boolean keyDown(int arg0) {
-        System.out.println(camFirstPerson.eye.x + " " + camFirstPerson.eye.z);
+        System.out.println(camFirstPerson.eye.x + " " + camFirstPerson.eye.z  );
+        System.out.println(outer.northWall.getPosition().x + " " + outer.northWall.getPosition().z);
+
     return false;
     }
 

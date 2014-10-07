@@ -3,12 +3,15 @@ package com.tgra;
 import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by olafurn on 1.10.2014.
  */
 public class outerWalls {
 
+
+    List<Box> walls;
     Box eastWall;
     Box westWall;
     Box northWall;
@@ -21,41 +24,25 @@ public class outerWalls {
 
     public void create()
     {
-        eastWall = new Box(new Point3D(0.0f, 0.0f, 0.0f),1f, new Color3(1f,0f,1f));
-        westWall = new Box(new Point3D(0.0f, 0.0f, 0.0f),1f, new Color3(1f,0f,1f));
-        northWall = new Box(new Point3D(0f, 0.0f, 0f),1f, new Color3(1f,0f,1f));
-        southWall = new Box(new Point3D(0f, 0.0f, 0f),1f, new Color3(1f,0f,1f));
+        walls = new ArrayList<Box>();
+        eastWall = new Box(new Point3D(20.0f, 0.0f, 0.0f),1f,5f, 39f, new Color3(1f,0f,1f));
+        northWall = new Box(new Point3D(0f, 0.0f, -20f),39f, 5f, 1f, new Color3(1f,0f,1f));
+        westWall = new Box(new Point3D(-20.0f, 0.0f, 0.0f),1f, 5f, 39f, new Color3(1f,0f,1f));
+        southWall = new Box(new Point3D(0f, 0.0f, 20f),39f, 5f, 1f, new Color3(1f,0f,1f));
 
-        eastVector = new Vector3D(20,0,0);
-        westVector = new Vector3D(-20,0,20);
-        northVector = new Vector3D(0,0,20);
-        southVector = new Vector3D(20,0,-20);
+        walls.add(eastWall);
+        walls.add(northWall);
+        walls.add(westWall);
+        walls.add(southWall);
     }
 
     public void display()
     {
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glTranslatef(10f,0f,0f);
-        Gdx.gl11.glScalef(0.1f,2f,20f);
-        eastWall.draw();
-        Gdx.gl11.glPopMatrix();
 
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glTranslatef(-10f,0f,0f);
-        Gdx.gl11.glScalef(0.1f,2f,20f);
-        westWall.draw();
-        Gdx.gl11.glPopMatrix();
-
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glTranslatef(0f,0f,10f);
-        Gdx.gl11.glScalef(20f,2f,0.1f);
-        northWall.draw();
-        Gdx.gl11.glPopMatrix();
-
-        Gdx.gl11.glPushMatrix();
-        Gdx.gl11.glTranslatef(0f,0f,-10f);
-        Gdx.gl11.glScalef(20f,2f,0.1f);
-        southWall.draw();
-        Gdx.gl11.glPopMatrix();
+        for(Box i : walls) {
+            Gdx.gl11.glPushMatrix();
+            i.draw();
+            Gdx.gl11.glPopMatrix();
+        }
     }
 }

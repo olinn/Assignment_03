@@ -117,6 +117,11 @@ public class Camera
 		v = newV;
 	}
 
+    public void jump()
+    {
+
+    }
+
     public Vector3D getNnegative()
     {
         return new Vector3D(n.x * -1, n.y * -1, n.z * -1);
